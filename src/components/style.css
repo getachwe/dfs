@@ -1,0 +1,25 @@
+body{
+    background-color:rgb(red, green, blue);
+}
+
+.maze_container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    height: 100%;
+    width: 10%;
+    display: flex;
+}
+.node{
+    background-color:rgb(243, 190, 190);
+    width: 5%;
+    height: 100%;
+    border-top: 1px;
+    border-right: 1px;
+    border-left: 1px;
+    border-style: solid;
+    border-color: gray;
+}
