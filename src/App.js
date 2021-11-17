@@ -1,33 +1,20 @@
 import "./App.css";
-import Home from "./components/Home";
+//import Home from "./pages/Home";
 import Matrix from "./components/Matrix";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+//import BasicTable from "./components/BasicTable";
+//import  Grid  from "./components/Grid";
+//import  DataGrid  from "./components/DataGrid";
+import Card from "./components/Card";
 
+//
 
-function App() {
-
-  
-
+const App = () => {
   return (
-    <Router>
-    <div className="App">
-  
-  <Switch>
-    <Route path="/Matrix" component={Matrix}>
-     
-    </Route>   
-    <Route path="/" component={Home}>
-    </Route>
-  </Switch>
-   
+    <div>
+      <Card />
     </div>
-    </Router>
   );
-}
+};
 
 export default App;

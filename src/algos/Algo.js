@@ -1,5 +1,5 @@
 import React from "react";
-const Algo = ()=>{
+ Algo = ()=>{
 let groupIndex;
 const setGroups = (table) => {
     groupIndex = 2
@@ -29,11 +29,3 @@ const dfs = (table, i, j) => {
     dfs(table, i + 1 , j)
     dfs(table, i + 1 , j + 1)
 }
-
-module.exports = {setGroups}
-return(
-    
-)
-}
-export default Algo;
-
