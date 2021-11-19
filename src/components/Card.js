@@ -6,58 +6,59 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
-import produce from "immer";
-
+import { setGroups } from "../algos/Algo.js";
+//import { pink } from "@mui/material/colors";
 
 export default function BasicCard() {
-  const [row, setRow] = useState("");
-  const [Cols, setCols] = useState("");
+  const [numOfRows, setNumOfRows] = useState("");
+  const [numOfCols, setNumOfCols] = useState("");
+  const [colors, setColors] = useState(["fff", "000"]);
+  const [grid, setGrid] = useState([]);
+  const [numOfGrop, setNumOfGrop] = useState("");
 
-  const numRows = 10;
-  const numCols = 10;
-  const rows = [];
+
   const generateEmptyGrid = () => {
-   
-    for (let i = 0; i < numRows; i++) {
-      rows.push(
-        Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-      );
+    const newGrid = [];
+    for (let i = 0; i < numOfRows; i++) {
+      newGrid[i] = [];
+      for (let j = 0; j < numOfCols; j++) {
+        newGrid[i].push(Math.round(Math.random()));
+      }
     }
-
-    return rows;
+    setNumOfGrop();
+    return newGrid;
+   
   };
-  const solve = () => {
-   
-    for (let i = 0; i < numRows; i++) {
-      rows.push(
-        Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-      );
-    }
 
-    return rows;
+  
+  const solve = () => {
+    const { table, groupIndex } = setGroups(grid);
+    let newColors = [];
+    for (let i = 2; i < groupIndex; i++) {
+      newColors.push(Math.floor(Math.random() * 16777215).toString(16));
+      
+      setNumOfGrop(groupIndex-2);
+    }
+    newColors = ["fff", "000", ...newColors];
+    debugger;
+    setColors(newColors);
+    setGrid(table);
   };
 
   const restart = () => {
-    const rows = [];
-    for (let i = 0; i < 0; i++) {
-      rows.push(
-        Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-      );
-    }
+    let res=[];
+    setNumOfGrop();
+    return res;
+    
+  };
+ 
 
-    return rows;
+  const getColor = (groupId) => {
+    return `#${colors[groupId]}`;
   };
 
-  const [group, setGroups] = useState(() => {
-    return generateEmptyGrid();
-  });
-
-  const [grid, setGrid] = useState(() => {
-    return generateEmptyGrid();
-  });
-
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275 , backgroundColor: "pink"}}>
       <CardContent>
         <Box
           sx={{
@@ -67,67 +68,64 @@ export default function BasicCard() {
           }}
         >
           <TextField
-            helperText="Please enter please enter bitmap size"
+            helperText="Please enter  bitmap size"
             id="demo-helper-text-aligned"
             label="Row"
-            value={row}
+            value={numOfRows}
             onChange={(e) => {
-              setRow(e.target.value);
+              setNumOfRows(e.target.value);
             }}
+            type="number"
           />
           <TextField
             helperText=" "
             id="demo-helper-text-aligned-no-helper"
             label="Column"
-            value={Cols}
+            value={numOfCols}
             onChange={(e) => {
-              setCols(e.target.value);
+              setNumOfCols(e.target.value);
             }}
+            type="number"
           />
         </Box>
-        <div className='mytable'
+        <div
+          className="mytable"
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${numCols}, 20px)`,
-            
+            gridTemplateColumns: `repeat(${grid.length}, 20px)`,
           }}
-          
         >
-      
-          {grid.map((rows, i) =>
-            rows.map((col, k) => (
+          {grid.map((row) =>
+            row.map((col) => (
               <div
                 style={{
                   width: 20,
                   height: 20,
-                  backgroundColor: grid[i][k] ? "black" : undefined,
+                  backgroundColor: getColor(col),
                   border: "solid 1px black",
                 }}
               />
             ))
           )}
         </div>
+        <p>FUNDE {numOfGrop} ESLANDS</p>
       </CardContent>
       <CardActions>
+      
         <Button
           size="small"
           onClick={() => {
-            setGrid(generateEmptyGrid);
+            setGrid(generateEmptyGrid());
           }}
         >
-          RANDOMIZE
+          randomize
         </Button>
 
         <Button
           size="small"
           onClick={() => {
-            const solution = setGroups();
-
-            debugger;
-            for (let i = 2; i < solution.groupIndex; i++) {
-              this.colors[i] = Math.floor(Math.random() * 16777215).toString(
-                16
-              );
+            if (grid.length) {
+              solve();
             }
           }}
         >
@@ -140,8 +138,9 @@ export default function BasicCard() {
             setGrid(restart());
           }}
         >
-        RESTART
+          restart
         </Button>
+        
       </CardActions>
     </Card>
   );
