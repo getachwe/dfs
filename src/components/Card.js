@@ -37,14 +37,14 @@ export default function BasicCard() {
     for (let i = 2; i < groupIndex; i++) {
       newColors.push(Math.floor(Math.random() * 16777215).toString(16));
       
-      setNumOfGrop(groupIndex-2);
+      setNumOfGrop(groupIndex);
     }
     newColors = ["fff", "000", ...newColors];
-    debugger;
+    //debugger;
     setColors(newColors);
     setGrid(table);
   };
-  debugger;
+  //debugger;
   const restart = () => {
     let res=[];
     setNumOfGrop();
@@ -88,6 +88,7 @@ export default function BasicCard() {
             type="number"
           />
         </Box>
+        
         <div
           className="mytable"
           style={{
