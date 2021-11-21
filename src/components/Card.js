@@ -10,11 +10,11 @@ import { setGroups } from "../algos/Algo.js";
 //import { pink } from "@mui/material/colors";
 
 export default function BasicCard() {
-  const [numOfRows, setNumOfRows] = useState("");
-  const [numOfCols, setNumOfCols] = useState("");
+  const [numOfRows, setNumOfRows] = useState(0);
+  const [numOfCols, setNumOfCols] = useState(0);
   const [colors, setColors] = useState(["fff", "000"]);
   const [grid, setGrid] = useState([]);
-  const [numOfGrop, setNumOfGrop] = useState("");
+  const [numOfGrop, setNumOfGrop] = useState(0);
 
 
   const generateEmptyGrid = () => {
@@ -44,7 +44,7 @@ export default function BasicCard() {
     setColors(newColors);
     setGrid(table);
   };
-
+  debugger;
   const restart = () => {
     let res=[];
     setNumOfGrop();
@@ -92,7 +92,7 @@ export default function BasicCard() {
           className="mytable"
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${grid.length}, 20px)`,
+            gridTemplateColumns: `repeat(${numOfCols}, 20px)`,
           }}
         >
           {grid.map((row) =>
@@ -108,6 +108,7 @@ export default function BasicCard() {
             ))
           )}
         </div>
+        
         <p>FUNDE {numOfGrop} ESLANDS</p>
       </CardContent>
       <CardActions>

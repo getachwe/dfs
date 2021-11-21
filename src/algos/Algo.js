@@ -19,7 +19,7 @@ const dfs = (table, R, C) => {
   if ( R < 0 ||
     R >= table.length ||
     C < 0 ||
-    C >= table.length ||
+    C >= table[0].length ||
     table[R][C] !== 1
   )
     return;
