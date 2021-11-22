@@ -16,7 +16,6 @@ export default function BasicCard() {
   const [grid, setGrid] = useState([]);
   const [numOfGrop, setNumOfGrop] = useState(0);
 
-
   const generateEmptyGrid = () => {
     const newGrid = [];
     for (let i = 0; i < numOfRows; i++) {
@@ -27,17 +26,15 @@ export default function BasicCard() {
     }
     setNumOfGrop();
     return newGrid;
-   
   };
 
-  
   const solve = () => {
     const { table, groupIndex } = setGroups(grid);
     let newColors = [];
     for (let i = 2; i < groupIndex; i++) {
       newColors.push(Math.floor(Math.random() * 16777215).toString(16));
-      
-      setNumOfGrop(groupIndex);
+
+      setNumOfGrop(groupIndex-2);
     }
     newColors = ["fff", "000", ...newColors];
     //debugger;
@@ -46,19 +43,17 @@ export default function BasicCard() {
   };
   //debugger;
   const restart = () => {
-    let res=[];
+    let res = [];
     setNumOfGrop();
     return res;
-    
   };
- 
 
   const getColor = (groupId) => {
     return `#${colors[groupId]}`;
   };
 
   return (
-    <Card sx={{ minWidth: 275 , backgroundColor: "pink"}}>
+    <Card sx={{ minWidth: 275, backgroundColor: "pink" }}>
       <CardContent>
         <Box
           sx={{
@@ -88,7 +83,7 @@ export default function BasicCard() {
             type="number"
           />
         </Box>
-        
+
         <div
           className="mytable"
           style={{
@@ -109,11 +104,10 @@ export default function BasicCard() {
             ))
           )}
         </div>
-        
+
         <p>FUNDE {numOfGrop} ESLANDS</p>
       </CardContent>
       <CardActions>
-      
         <Button
           size="small"
           onClick={() => {
@@ -142,7 +136,6 @@ export default function BasicCard() {
         >
           restart
         </Button>
-        
       </CardActions>
     </Card>
   );
